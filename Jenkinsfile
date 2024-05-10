@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('Build') {
             agent {
                 docker {
                     image 'node:18-alpine'
                     reuseNode true
-                }    
+                }
             }
             steps {
-                cleanWs()
                 sh '''
                     ls -la
                     node --version
@@ -21,6 +20,7 @@ pipeline {
                 '''
             }
         }
+
         stage('Test') {
             agent {
                 docker {
@@ -36,6 +36,5 @@ pipeline {
                 '''
             }
         }
-
     }
 }
